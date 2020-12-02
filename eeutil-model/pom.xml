@@ -1,0 +1,76 @@
+<!-- Copyright (C) 2012-13 MINHAP, Gobierno de España
+   This program is licensed and may be used, modified and redistributed under the terms
+   of the European Public License (EUPL), either version 1.1 or (at your
+   option) any later version as soon as they are approved by the European Commission.
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+   or implied. See the License for the specific language governing permissions and
+   more details.
+   You should have received a copy of the EUPL1.1 license
+   along with this program; if not, you may find it at
+   http://joinup.ec.europa.eu/software/page/eupl/licence-eupl --> 
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"> 
+    <modelVersion>
+        4.0.0
+    </modelVersion> 
+    <artifactId>
+        eeutil-model
+    </artifactId> 
+    <description>
+         En este proyecto se generaran todas las entidades comunes al resto de proyectos. Es importante recalcar que este proyecto no tiene lógica programada sino que se compone de objetos planos, (POJOs), y de interfaces. * Objetos POJO de intercambio: Objeto Documento, objeto Expediente, etc. * Interface de acceso a repositorio decumental. * Interfaces de lógica de servicios externa a InSide: Interfaces de Firma, de Registro Electrónico, etc. 
+    </description> 
+    <parent> 
+        <groupId>
+            es.gob.aapp.eeutil
+        </groupId> 
+        <artifactId>
+            eeutil-mvn-base
+        </artifactId> 
+        <version>
+            4.1
+        </version> 
+    </parent> 
+    <dependencies> 
+        <dependency> 
+            <groupId>
+                org.springframework.security
+            </groupId> 
+            <artifactId>
+                spring-security-config
+            </artifactId> 
+            <scope>
+                provided
+            </scope> 
+        </dependency> 
+        <dependency> 
+            <groupId>
+                org.springframework.security
+            </groupId> 
+            <artifactId>
+                spring-security-core
+            </artifactId> 
+            <scope>
+                provided
+            </scope> 
+        </dependency> 
+        <dependency> 
+            <groupId>
+                org.springframework.data
+            </groupId> 
+            <artifactId>
+                spring-data-jpa
+            </artifactId> 
+            <exclusions> 
+                <exclusion> 
+                    <artifactId>
+                        slf4j-api
+                    </artifactId> 
+                    <groupId>
+                        org.slf4j
+                    </groupId> 
+                </exclusion> 
+            </exclusions> 
+        </dependency> 
+    </dependencies> 
+</project>

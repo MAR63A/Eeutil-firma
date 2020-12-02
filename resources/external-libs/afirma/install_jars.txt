@@ -1,0 +1,1 @@
+mvn install:install-file -Dfile=miniapplet-full_1_5.jar -DgroupId=es.gob.afirma -DartifactId=miniapplet-afirma -Dversion=5.0 -Dpackaging=jar

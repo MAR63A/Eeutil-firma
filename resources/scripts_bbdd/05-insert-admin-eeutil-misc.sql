@@ -1,0 +1,1 @@
+insert into usuario_credencial values(XXX);

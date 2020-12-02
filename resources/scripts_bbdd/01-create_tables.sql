@@ -1,0 +1,308 @@
+DROP TABLE IF EXISTS `GeneradorClaves`;
+CREATE TABLE
+    GeneradorClaves
+    (
+        GenName VARCHAR(255) NOT NULL,
+        GenValue INT NOT NULL,
+        PRIMARY KEY (GenName)
+    )
+    ENGINE=InnoDB DEFAULT CHARSET=utf8;
+    
+DROP TABLE IF EXISTS `inside_aplicaciones`;
+CREATE TABLE
+    inside_aplicaciones
+    (
+        idaplicacion VARCHAR(100) NOT NULL,
+        password VARCHAR(100) NOT NULL,
+        descripcion VARCHAR(1000) NOT NULL,
+        activa VARCHAR(1) DEFAULT 'S' NOT NULL,
+        tramitar VARCHAR(1) DEFAULT 'S' NOT NULL,
+        sello VARCHAR(1) DEFAULT 'S' NOT NULL,
+        firma VARCHAR(1) DEFAULT 'S' NOT NULL,
+		email VARCHAR(255),
+		telefono VARCHAR(255),
+		responsable VARCHAR(255),
+		unidad VARCHAR(10),
+        PRIMARY KEY (idaplicacion)
+    )
+    ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS `inside_aplicaciones_propiedad`;
+CREATE TABLE
+    inside_aplicaciones_propiedad
+    (
+        idaplicacion VARCHAR(100) NOT NULL,
+        propiedad VARCHAR(100) NOT NULL,
+        valor VARCHAR(500) NOT NULL,
+        PRIMARY KEY (idaplicacion, propiedad)
+    )
+    ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `inside_metadatos`;
+CREATE TABLE
+    inside_metadatos
+    (
+        idmetadato INT(4) NOT NULL,
+        id_java VARCHAR(50) NOT NULL,
+        id_repo VARCHAR(50) NOT NULL,
+        origen VARCHAR(1) DEFAULT 'A' NOT NULL COMMENT 'A-Ambos, E-Expediente, D-Documento',
+        tipo VARCHAR(1) DEFAULT 'S' NOT NULL COMMENT 'S - String, I - Integer, D - Date',
+        enviable_repo VARCHAR(1) DEFAULT 'S' NOT NULL,
+        modificable_repo VARCHAR(1) DEFAULT 'S' NOT NULL,
+        info VARCHAR(1) DEFAULT 'S' NOT NULL,
+        alta VARCHAR(1) DEFAULT 'S' NOT NULL,
+        modificacion VARCHAR(1) DEFAULT 'S' NOT NULL,
+        multivaluado VARCHAR(1) DEFAULT 'N' NOT NULL,
+        automatico_alta VARCHAR(1) DEFAULT 'N' NOT NULL,
+        automatico_mod VARCHAR(1) DEFAULT 'N' NOT NULL,
+        obligatorio VARCHAR(1) DEFAULT 'S' NOT NULL,
+        extendido VARCHAR(1) DEFAULT 'N' NOT NULL,
+        `DEFAULT` VARCHAR(100),
+        PRIMARY KEY (idmetadato)
+    )
+    ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='utf8_general_ci';
+    
+DROP TABLE IF EXISTS `peticiones_pdfa`;
+CREATE TABLE
+    peticiones_pdfa
+    (
+        id INT NOT NULL,
+        idaplicacion VARCHAR(100) NOT NULL,
+        fecha_peticion DATETIME NOT NULL,
+        numero_paginas INT NOT NULL,
+        PRIMARY KEY (id),
+        CONSTRAINT peticiones_pdfa_fk1 FOREIGN KEY (idaplicacion) REFERENCES
+        inside_aplicaciones (idaplicacion)
+    )
+    ENGINE=MyISAM DEFAULT CHARSET=latin1;
+    
+DROP TABLE IF EXISTS `usuario_credencial`;
+CREATE TABLE
+    usuario_credencial
+    (
+        nif VARCHAR(100) NOT NULL
+    )
+    ENGINE=MyISAM DEFAULT CHARSET=latin1;
+	
+DROP TABLE IF EXISTS `inside_aplicaciones_plantillas`;	
+CREATE TABLE
+    inside_aplicaciones_plantillas
+    (
+        idaplicacion VARCHAR(100) NOT NULL,
+        idplantilla VARCHAR(100) NOT NULL,
+        plantilla BLOB NOT NULL,
+        PRIMARY KEY (idaplicacion, idplantilla)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+	
+DROP TABLE IF EXISTS `UnidadOrganica`;	
+CREATE TABLE UnidadOrganica (
+        id int NOT NULL, 
+        Codigo_Unidad_Organica varchar(10) NOT NULL, 
+        Nombre_Unidad_Organica varchar(255) NOT NULL, 
+        Nivel_Administracion tinyint NOT NULL, 
+        Entidad_Derecho_Publico varchar(1) NOT NULL, 
+        Codigo_Externo varchar(255), 
+        Codigo_Unidad_Superior varchar(10) NOT NULL, 
+        Nombre_Unidad_Superior varchar(255) NOT NULL, 
+        Codigo_Unidad_Raiz varchar(10) NOT NULL, 
+        Nombre_Unidad_Raiz varchar(255) NOT NULL, 
+        Codigo_Raiz_Derecho_Publico varchar(10), 
+        Nombre_Raiz_Derecho_Publico varchar(255), 
+        Nivel_Jerarquico tinyint NOT NULL, 
+        Estado varchar(1) NOT NULL, 
+        Fecha_Alta datetime, 
+        Fecha_Baja datetime, 
+        Fecha_Anulacion datetime, 
+        Fecha_Extincion datetime, 
+        created_at datetime NOT NULL, PRIMARY KEY (id), 
+        CONSTRAINT unidad_unica_idx UNIQUE (Codigo_Unidad_Organica)) 
+        ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS QRTZ_JOB_DETAILS;
+CREATE TABLE QRTZ_JOB_DETAILS
+  (
+    JOB_NAME  VARCHAR(80) NOT NULL,
+    JOB_GROUP VARCHAR(80) NOT NULL,
+    DESCRIPTION VARCHAR(120) NULL,
+    JOB_CLASS_NAME   VARCHAR(128) NOT NULL,
+    IS_DURABLE VARCHAR(1) NOT NULL,
+    IS_VOLATILE VARCHAR(1) NOT NULL,
+    IS_STATEFUL VARCHAR(1) NOT NULL,
+    REQUESTS_RECOVERY VARCHAR(1) NOT NULL,
+    JOB_DATA BLOB NULL,
+    PRIMARY KEY (JOB_NAME,JOB_GROUP)
+);
+
+DROP TABLE IF EXISTS QRTZ_JOB_LISTENERS;
+CREATE TABLE QRTZ_JOB_LISTENERS
+  (
+    JOB_NAME  VARCHAR(80) NOT NULL,
+    JOB_GROUP VARCHAR(80) NOT NULL,
+    JOB_LISTENER VARCHAR(80) NOT NULL,
+    PRIMARY KEY (JOB_NAME,JOB_GROUP,JOB_LISTENER),
+    FOREIGN KEY (JOB_NAME,JOB_GROUP)
+        REFERENCES QRTZ_JOB_DETAILS(JOB_NAME,JOB_GROUP)
+);
+
+DROP TABLE IF EXISTS QRTZ_TRIGGERS;
+CREATE TABLE QRTZ_TRIGGERS
+  (
+    TRIGGER_NAME VARCHAR(80) NOT NULL,
+    TRIGGER_GROUP VARCHAR(80) NOT NULL,
+    JOB_NAME  VARCHAR(80) NOT NULL,
+    JOB_GROUP VARCHAR(80) NOT NULL,
+    IS_VOLATILE VARCHAR(1) NOT NULL,
+    DESCRIPTION VARCHAR(120) NULL,
+    NEXT_FIRE_TIME BIGINT(13) NULL,
+    PREV_FIRE_TIME BIGINT(13) NULL,
+    TRIGGER_STATE VARCHAR(16) NOT NULL,
+    TRIGGER_TYPE VARCHAR(8) NOT NULL,
+    START_TIME BIGINT(13) NOT NULL,
+    END_TIME BIGINT(13) NULL,
+    CALENDAR_NAME VARCHAR(80) NULL,
+    MISFIRE_INSTR SMALLINT(2) NULL,
+    JOB_DATA BLOB NULL,
+    PRIMARY KEY (TRIGGER_NAME,TRIGGER_GROUP),
+    FOREIGN KEY (JOB_NAME,JOB_GROUP)
+        REFERENCES QRTZ_JOB_DETAILS(JOB_NAME,JOB_GROUP)
+);
+
+DROP TABLE IF EXISTS QRTZ_SIMPLE_TRIGGERS;
+CREATE TABLE QRTZ_SIMPLE_TRIGGERS
+  (
+    TRIGGER_NAME VARCHAR(80) NOT NULL,
+    TRIGGER_GROUP VARCHAR(80) NOT NULL,
+    REPEAT_COUNT BIGINT(7) NOT NULL,
+    REPEAT_INTERVAL BIGINT(12) NOT NULL,
+    TIMES_TRIGGERED BIGINT(7) NOT NULL,
+    PRIMARY KEY (TRIGGER_NAME,TRIGGER_GROUP),
+    FOREIGN KEY (TRIGGER_NAME,TRIGGER_GROUP)
+        REFERENCES QRTZ_TRIGGERS(TRIGGER_NAME,TRIGGER_GROUP)
+);
+
+DROP TABLE IF EXISTS QRTZ_CRON_TRIGGERS;
+CREATE TABLE QRTZ_CRON_TRIGGERS
+  (
+    TRIGGER_NAME VARCHAR(80) NOT NULL,
+    TRIGGER_GROUP VARCHAR(80) NOT NULL,
+    CRON_EXPRESSION VARCHAR(80) NOT NULL,
+    TIME_ZONE_ID VARCHAR(80),
+    PRIMARY KEY (TRIGGER_NAME,TRIGGER_GROUP),
+    FOREIGN KEY (TRIGGER_NAME,TRIGGER_GROUP)
+        REFERENCES QRTZ_TRIGGERS(TRIGGER_NAME,TRIGGER_GROUP)
+);
+
+DROP TABLE IF EXISTS QRTZ_BLOB_TRIGGERS;
+CREATE TABLE QRTZ_BLOB_TRIGGERS
+  (
+    TRIGGER_NAME VARCHAR(80) NOT NULL,
+    TRIGGER_GROUP VARCHAR(80) NOT NULL,
+    BLOB_DATA BLOB NULL,
+    PRIMARY KEY (TRIGGER_NAME,TRIGGER_GROUP),
+    FOREIGN KEY (TRIGGER_NAME,TRIGGER_GROUP)
+        REFERENCES QRTZ_TRIGGERS(TRIGGER_NAME,TRIGGER_GROUP)
+);
+
+DROP TABLE IF EXISTS QRTZ_TRIGGER_LISTENERS;
+CREATE TABLE QRTZ_TRIGGER_LISTENERS
+  (
+    TRIGGER_NAME  VARCHAR(80) NOT NULL,
+    TRIGGER_GROUP VARCHAR(80) NOT NULL,
+    TRIGGER_LISTENER VARCHAR(80) NOT NULL,
+    PRIMARY KEY (TRIGGER_NAME,TRIGGER_GROUP,TRIGGER_LISTENER),
+    FOREIGN KEY (TRIGGER_NAME,TRIGGER_GROUP)
+        REFERENCES QRTZ_TRIGGERS(TRIGGER_NAME,TRIGGER_GROUP)
+);
+
+DROP TABLE IF EXISTS QRTZ_CALENDARS;
+CREATE TABLE QRTZ_CALENDARS
+  (
+    CALENDAR_NAME  VARCHAR(80) NOT NULL,
+    CALENDAR BLOB NOT NULL,
+    PRIMARY KEY (CALENDAR_NAME)
+);
+
+DROP TABLE IF EXISTS QRTZ_PAUSED_TRIGGER_GRPS;
+CREATE TABLE QRTZ_PAUSED_TRIGGER_GRPS
+  (
+    TRIGGER_GROUP  VARCHAR(80) NOT NULL,
+    PRIMARY KEY (TRIGGER_GROUP)
+);
+
+DROP TABLE IF EXISTS QRTZ_FIRED_TRIGGERS;
+CREATE TABLE QRTZ_FIRED_TRIGGERS
+  (
+    ENTRY_ID VARCHAR(95) NOT NULL,
+    TRIGGER_NAME VARCHAR(80) NOT NULL,
+    TRIGGER_GROUP VARCHAR(80) NOT NULL,
+    IS_VOLATILE VARCHAR(1) NOT NULL,
+    INSTANCE_NAME VARCHAR(80) NOT NULL,
+    FIRED_TIME BIGINT(13) NOT NULL,
+    STATE VARCHAR(16) NOT NULL,
+    JOB_NAME VARCHAR(80) NULL,
+    JOB_GROUP VARCHAR(80) NULL,
+    IS_STATEFUL VARCHAR(1) NULL,
+    REQUESTS_RECOVERY VARCHAR(1) NULL,
+    PRIMARY KEY (ENTRY_ID)
+);
+
+DROP TABLE IF EXISTS QRTZ_SCHEDULER_STATE;
+CREATE TABLE QRTZ_SCHEDULER_STATE
+  (
+    INSTANCE_NAME VARCHAR(80) NOT NULL,
+    LAST_CHECKIN_TIME BIGINT(13) NOT NULL,
+    CHECKIN_INTERVAL BIGINT(13) NOT NULL,
+    RECOVERER VARCHAR(80) NULL,
+    PRIMARY KEY (INSTANCE_NAME)
+);
+
+DROP TABLE IF EXISTS QRTZ_LOCKS;
+CREATE TABLE QRTZ_LOCKS
+  (
+    LOCK_NAME  VARCHAR(40) NOT NULL,
+    PRIMARY KEY (LOCK_NAME)
+);
+
+DROP TABLE IF EXISTS `aplicacion_operacion`;
+CREATE TABLE
+    aplicacion_operacion
+    (
+        id INT NOT NULL,
+        idaplicacion VARCHAR(100) NOT NULL,
+        operacion VARCHAR(100) NOT NULL,
+        numero_peticiones INT NOT NULL,
+        capturar VARCHAR(1) DEFAULT 'N' NOT NULL,
+        PRIMARY KEY (id),
+        CONSTRAINT aplicacion_operacion_fk1 FOREIGN KEY (idaplicacion) REFERENCES
+        inside_aplicaciones (idaplicacion)
+    )
+    ENGINE=MyISAM DEFAULT CHARSET=latin1;
+	
+DROP TABLE IF EXISTS `peticiones`;
+CREATE TABLE
+    peticiones
+    (
+        id INT NOT NULL,
+        aplicacion VARCHAR(100) NOT NULL,
+        operacion VARCHAR(100) NOT NULL,
+        fecha DATETIME NOT NULL,
+        peticion LONGBLOB NOT NULL,
+        PRIMARY KEY (id),
+        CONSTRAINT peticiones_fk1 FOREIGN KEY (aplicacion) REFERENCES
+        inside_aplicaciones (idaplicacion)
+    )
+    ENGINE=MyISAM DEFAULT CHARSET=latin1;
+	
+DROP TABLE IF EXISTS `peticionesRespuestaAsyncrono`;
+CREATE TABLE
+    peticionesRespuestaAsyncrono
+    (
+        id BIGINT NOT NULL,
+        operacion VARCHAR(100),
+        fechaPeticion TIMESTAMP,
+        objetoPeticionSerializado MEDIUMBLOB,
+        fechaRespuesta TIMESTAMP,
+        objetoRespuestaSerializado BLOB,
+        PRIMARY KEY (id)
+    )
+    ENGINE=MyISAM DEFAULT CHARSET=latin1;
