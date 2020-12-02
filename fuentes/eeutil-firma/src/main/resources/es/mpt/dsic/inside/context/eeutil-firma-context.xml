@@ -1,0 +1,53 @@
+<!-- Copyright (C) 2012-13 MINHAP, Gobierno de España
+   This program is licensed and may be used, modified and redistributed under the terms
+   of the European Public License (EUPL), either version 1.1 or (at your
+   option) any later version as soon as they are approved by the European Commission.
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+   or implied. See the License for the specific language governing permissions and
+   more details.
+   You should have received a copy of the EUPL1.1 license
+   along with this program; if not, you may find it at
+   http://joinup.ec.europa.eu/software/page/eupl/licence-eupl --> 
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx" xmlns:util="http://www.springframework.org/schema/util" xmlns:aop="http://www.springframework.org/schema/aop" xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd			
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd			
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd			
+			http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd"> 
+    <!-- Propiedades de la firma --> 
+    <bean id="firmaPropertyConfigurer" class="es.mpt.dsic.inside.config.resources.EeutilConfigPropertyPlaceHolderConfigurer"> 
+        <property name="fichero" value="formatosFirmas.properties" /> 
+    </bean> 
+    <!-- BEAN MPT FIRMA --> 
+    <bean id="mptFirmaService" class="es.mpt.dsic.inside.util.firma.service.MPTFirmaServiceImpl"> 
+        <property name="utilFirma" ref="utilFirma" /> 
+    </bean> 
+    <bean id="utilFirma" class="es.mpt.dsic.inside.util.firma.util.UtilFirma"> 
+        <property name="policyIdentifierKey" value="${policy.Identifier.Key}" /> 
+        <property name="signatureSubFilter" value="${policy.signatureSubFilter}" /> 
+        <property name="policyIdentifierHashKey" value="${policy.Identifier.Hash.Key}" /> 
+        <property name="policyIdentifierHashAlgoritmKey" value="${policy.Identifier.Hash.Algoritm.Key}" /> 
+        <property name="policyQualifierKey" value="${policy.Qualifier.Key}" /> 
+        <property name="policyDescriptionKey" value="${policy.Description.Key}" /> 
+        <property name="policySignatureSubFilterKey" value="${policy.SignatureSubFilter.Key}" /> 
+        <!-- PADES --> 
+        <property name="policySignatureSubFilterPades" value="${policy.SignatureSubFilter.Pades}" /> 
+        <property name="policyIdentifierPades" value="${policy.Identifier.Pades}" /> 
+        <property name="policyIdentifierHashPades" value="${policy.Identifier.Hash.Pades}" /> 
+        <property name="policyIdentifierHashAlgorithmPades" value="${policy.Identifier.Hash.Algorithm.Pades}" /> 
+        <property name="policyQualifierPades" value="${policy.Qualifier.Pades}" /> 
+        <!-- XADES --> 
+        <property name="policyIdentifierXades" value="${policy.Identifier.Xades}" /> 
+        <property name="policyDescriptionXades" value="${policy.policyDescription.Xades}" /> 
+        <property name="policyIdentifierHashXades" value="${policy.Identifier.Hash.Xades}" /> 
+        <property name="policyIdentifierHashAlgoritmXades" value="${policy.Identifier.Hash.Algoritm.Xades}" /> 
+        <property name="policyQualifierXades" value="${policy.Qualifier.Xades}" /> 
+        <!-- CADES --> 
+        <property name="policyIdentifierCades" value="${policy.Identifier.Cades}" /> 
+        <property name="policyIdentifierHashCades" value="${policy.Identifier.Hash.Cades}" /> 
+        <property name="policyIdentifierHashAlgoritmCades" value="${policy.Identifier.Hash.Algoritm.Cades}" /> 
+        <property name="policyQualifierCades" value="${policy.Qualifier.Cades}" /> 
+    </bean> 
+</beans>
