@@ -75,7 +75,36 @@
         <fork.mode.itegration.tests>
             never
         </fork.mode.itegration.tests> 
-    </properties> 
+    </properties>
+    <scm>
+		<connection>scm:git:https://github.com/MAR63A/Eeutil-firma.git</connection>
+		<developerConnection>scm:git:[push=]https://github.com/MAR63A/Eeutil-firma.git[fetch=]https://github.com/MAR63A/Eeutil-firma.git</developerConnection>
+		<url>https://github.com/MAR63A/Eeutil-firma.git</url>
+		<tag>HEAD</tag>
+	</scm>
+	<repositories>
+          <repository>
+	    <releases>
+	      <enabled>true</enabled>
+	      <updatePolicy>never</updatePolicy>
+	    </releases>
+	    <snapshots>
+	      <enabled>true</enabled>
+	      <updatePolicy>never</updatePolicy>
+	    </snapshots>
+	    <id>maven-carm-es-Eetuil-firma-remote-repos</id>
+	    <name>repo-carm-es-Eetuil-firma-remote-repos</name>
+              <url>https://raw.githubusercontent.com/MAR63A/Eeutil-firma/mvn-repo</url>
+	    </repository>	    
+	    <repository>
+	      <snapshots>
+	        <enabled>false</enabled>
+	      </snapshots>
+	      <id>central</id>
+	      <name>Central Repository</name>
+	      <url>https://repo.maven.apache.org/maven2</url>
+	    </repository>
+        </repositories> 
     <dependencyManagement> 
         <dependencies> 
             <!-- SPRING --> 
@@ -707,12 +736,12 @@
         <module>
             ../eeutil-afirmaws-stub
         </module> 
-        <module>
+        <!-- <module>
             ../eeutil-csvbroker-stub
         </module> 
         <module>
             ../eeutil-csvstoragews-stub
-        </module> 
+        </module> --> 
         <module>
             ../eeutil-inside-stub
         </module> 
@@ -740,7 +769,7 @@
         <module>
             ../eeutil-firma
         </module> 
-        <module>
+        <!-- <module>
             ../eeutil-misc
         </module> 
         <module>
@@ -751,7 +780,7 @@
         </module> 
         <module>
             ../eeutil-vis-docexp
-        </module> 
+        </module>  -->
     </modules> 
     <build> 
         <!-- Filtrado de recursos para permitir cambios en variables de configuración 

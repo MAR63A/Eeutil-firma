@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright (C) 2012-13 MINHAP, Gobierno de España
    This program is licensed and may be used, modified and redistributed under the terms
    of the European Public License (EUPL), either version 1.1 or (at your
@@ -9,7 +10,7 @@
    more details.
    You should have received a copy of the EUPL1.1 license
    along with this program; if not, you may find it at
-   http://joinup.ec.europa.eu/software/page/eupl/licence-eupl --> <?xml version="1.0" encoding="UTF-8"?> 
+   http://joinup.ec.europa.eu/software/page/eupl/licence-eupl -->
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:jaxws="http://cxf.apache.org/jaxws" xmlns:context="http://www.springframework.org/schema/context" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd 
 						http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd 
                         http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd

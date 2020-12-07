@@ -29,7 +29,8 @@
         </artifactId> 
         <version>
             4.1
-        </version> 
+        </version>
+        <relativePath>../eeutil-mvn-base</relativePath> 
     </parent> 
     <properties> 
         <mimeutil.version>

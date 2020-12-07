@@ -1,3 +1,4 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 <!-- Copyright (C) 2012-13 MINHAP, Gobierno de España
    This program is licensed and may be used, modified and redistributed under the terms
    of the European Public License (EUPL), either version 1.1 or (at your
@@ -9,8 +10,7 @@
    more details.
    You should have received a copy of the EUPL1.1 license
    along with this program; if not, you may find it at
-   http://joinup.ec.europa.eu/software/page/eupl/licence-eupl --> 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"> 
+   http://joinup.ec.europa.eu/software/page/eupl/licence-eupl -->
     <modelVersion>
         4.0.0
     </modelVersion> 
@@ -32,7 +32,8 @@
         </artifactId> 
         <version>
             4.1
-        </version> 
+        </version>
+        <relativePath>../eeutil-mvn-base</relativePath>
     </parent> 
     <properties> 
         <jetty.port>
@@ -237,7 +238,7 @@
                 </dependency> 
             </dependencies> 
         </profile> 
-        <profile> 
+        <!-- <profile> 
             <id>
                 redSara
             </id> 
@@ -265,7 +266,7 @@
                     </scope> 
                 </dependency> 
             </dependencies> 
-        </profile> 
+        </profile> --> 
         <profile> 
             <id>
                 debug
