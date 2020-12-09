@@ -35,6 +35,7 @@
         <version>
             4.1
         </version> 
+        <relativePath>../eeutil-mvn-base</relativePath>
     </parent> 
     <dependencies> 
         <dependency> 
