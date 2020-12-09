@@ -12,7 +12,7 @@
         eeutil-firma
     </artifactId>
 	<version>
-        0.0.1-CARM-SNAPSHOT
+        4.1-CARM.1-SNAPSHOT
     </version>
 	<packaging>
         pom
@@ -54,7 +54,7 @@
 	</properties>
 	<modules>
 		<module>
-            eeutil-mvn-base
+            fuentes/eeutil-mvn-base
         </module>
 	</modules>
 </project>
